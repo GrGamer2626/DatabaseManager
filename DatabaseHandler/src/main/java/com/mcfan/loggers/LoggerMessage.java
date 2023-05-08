@@ -1,14 +1,24 @@
 package com.mcfan.loggers;
 
+import java.util.logging.ConsoleHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import com.mcfan.main.Main;
 
 
 public abstract class LoggerMessage {
 	
-	private static Logger logger = Main.getLogger();
+	private static ConsoleHandler handler = new ConsoleHandler();
+	private static Logger logger = Logger.getLogger(LoggerMessage.class.getName());
+	
+	static {
+		logger.setUseParentHandlers(false);
+
+		handler.setFormatter(new LoggerMessageFormater());
+		handler.setLevel(Level.ALL);
+		
+		logger.addHandler(handler);
+		logger.setLevel(Level.ALL);
+	}
 	
 	
 	protected static void error(String msg) {
