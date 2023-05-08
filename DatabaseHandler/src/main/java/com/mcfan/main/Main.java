@@ -2,9 +2,6 @@ package com.mcfan.main;
 
 import java.util.List;
 import java.util.Scanner;
-import java.util.logging.ConsoleHandler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import com.mcfan.command.ListColumns;
 import com.mcfan.command.TableCreate;
@@ -22,7 +19,6 @@ import com.mcfan.command.RecordAdd;
 import com.mcfan.command.util.Command;
 import com.mcfan.command.util.CommandListener;
 import com.mcfan.database.DatabaseConnection;
-import com.mcfan.loggers.LoggerMessageFormater;
 
 import static com.mcfan.command.util.CommandManager.*;
 
@@ -30,15 +26,10 @@ import static com.mcfan.command.util.CommandManager.*;
 public class Main {
 	
 	private static final List<String> VALID_DATABASE_TYPE = List.of("sql", "mysql");
-	private static Logger logger = Logger.getLogger("");
 	private static String databaseType;
 	private static CommandListener commandListener;
 	
 	public static void main(String[] args) {
-		ConsoleHandler handler = new ConsoleHandler();
-		handler.setFormatter(new LoggerMessageFormater());
-		logger.addHandler(handler);
-		logger.setLevel(Level.ALL);
 		
 		registerAllCommands();
 		
@@ -134,11 +125,6 @@ public class Main {
 		String databaseType = scanner.nextLine().toLowerCase();
 		sender.sendMessageNl("");
 		return databaseType;
-	}
-	
-	
-	public static Logger getLogger() {
-		return logger;
 	}
 	
 	public static String getDatabaseType() {
