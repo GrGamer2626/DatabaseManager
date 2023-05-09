@@ -15,8 +15,8 @@ public class TableCreate implements CommandExecutor {
 	public boolean onCommand(ConsoleSender sender, String correctUsage, String[] args) {
 		int length = args.length;
 		if(length > 3) {
-			String tableName = getValidTableName(args[0]);
-			if(tableName != null) {
+			String tableName = args[0];
+			if(getValidTableName(tableName) != null) {
 				sender.sendMessageNl("&#FF0000Such table exist");
 				return false;
 			}
